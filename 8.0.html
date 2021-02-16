@@ -6,29 +6,24 @@
 </head>
 <body>
   <script>
-    // Function roughly estimates the amount of money a speeding ticket is going to cost.
-    function estimateFine(actualSpeed, speedLimit){
-      estimatedFine = 0;
-      speedAboveLimit = actualSpeed - speedLimit;
-      
-      if(speedAboveLimit < 5){
-        estimatedFine = 20;
+    function canJoinTheATeam( person ) {
+      if(person.isMale && person.length > 200 && person.squattingWeight > 150) {
+        return true
       }
-
-      if(speedAboveLimit > 20){
-        estimatedFine = 200;
-      }
-
-      if(speedAboveLimit > 30){
-        estimatedFine = 400;
-      }
-
-      if(speedAboveLimit > 40){
-        estimatedFine = 600;
-      }
-
-      return estimatedFine;
+      return false
     }
+
+  let jille = { length: 198,
+                squattingWeight: 20,
+                isMale: true
+              }
+  let robert = { length: 187,
+                 squattingWeight: 230,
+                 isMale: true
+               }
+
+  console.log("Can Jille join the A-team?",  canJoinTheATeam(jille) )
+  console.log("Can Robert join the A-team?",  canJoinTheATeam(robert) )
   </script>
 </body>
 </html>
