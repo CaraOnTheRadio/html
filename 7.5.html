@@ -1,0 +1,22 @@
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>;^) widebird</title>
+</head>
+<body>
+  <img id="birdpic" src="giant_heron.jpg">
+  <script>
+    function notANiceName(){
+      document.getElementById("birdpic").style.opacity = 100;
+      document.getElementById("birdpic").width = "1000";
+      document.getElementById("birdpic").height = "300";
+    }
+    function makeBirdGone(){
+      document.getElementById("birdpic").style.opacity = 0;
+    }
+    notANiceName();
+    document.getElementById("birdpic").onclick = makeBirdGone
+  </script>
+</body>
+</html>

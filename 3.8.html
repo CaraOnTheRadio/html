@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>:^) brede vogel</title>
+    <style>
+      body{
+       background-color: pink;
+     }
+    </style>
+  </head>
+  <body>
+    <img id="brede" src="giant_heron.jpg">
+    <script>
+      //3.8 Setup
+      function setBirdPictureStyle(){
+        document.getElementById("brede").style.width = "1000";
+        document.getElementById("brede").style.height = "400";
+      }
+      //3.8A
+      function alertClick(){
+        console.log("Een vlieg!");
+      }
+      //3.8B
+      function alertHover(){
+        console.log("Zit een vlieg op me!");
+      }
+      function alertLeaveHover(){
+        console.log("Waar is ie nou?");
+      }
+      //3.8C
+      function alertLeaveMove(){
+        console.log("Ik zie hem bewegen");
+      }
+      //uitvoer
+      setBirdPictureStyle();
+        document.getElementById("brede").onclick = alertClick;
+        document.getElementById("brede").onmouseenter = alertHover;
+        document.getElementById("brede").onmouseleave = alertLeaveHover;
+        document.getElementById("brede").onmousemove = alertLeaveMove;
+    </script>
+  </body>
+</html>

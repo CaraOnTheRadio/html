@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Mathijs was here</title>
+  </head>
+  <style>
+  #container {
+    padding: 10%;
+  }
+  body {
+    background-color: white;
+  }
+  #birdpic {
+    width: 100%;
+  }
+  </style>
+  <body>
+    <div id="container">
+      <a id="link" href="#">
+        <img id="birdpic" src="giant_heron.jpg">
+      </a>
+      <p>Giant Heron</p>
+    </div>
+    <script>
+      function setBirdPictureStyle(){
+          document.getElementById("birdpic").style.width = "500";
+          document.getElementById("birdpic").style.height = "300";
+          document.getElementById("birdpic").style.padding = "20px";
+          document.getElementById("birdpic").style.borderRadius = "50%";
+          document.getElementById("birdpic").src = "giant_heron.jpg";
+          document.getElementById("birdpic").style.backgroundColor = "#e50055";
+      }
+      function setBirdLink(){
+          document.getElementById("link").href = "https://en.wikipedia.org/wiki/Goliath_heron"; //wist niet of functie per onderdeel echt nodig was
+      }
+      function setContainerPadding(){
+          document.getElementById("container").style.padding = "10%";
+      }
+      function setBackgroundStyle(){
+          document.body.style.backgroundColor = "#000000";
+      }
+
+      function setWebsiteStyle(){ //Leek mij leuk
+        setBirdPictureStyle();
+        setContainerPadding();
+        setBirdLink();
+        setBackgroundStyle();
+      }
+      setWebsiteStyle();
+    </script>
+  </body>
+  </html>

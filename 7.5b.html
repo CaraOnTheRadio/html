@@ -1,0 +1,32 @@
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>;^) widebird</title>
+</head>
+<body>
+  <img id="birdpic" src="giant_heron.jpg">
+  <script>
+    function notANiceName(){
+      document.getElementById("birdpic").style.opacity = 100;
+      document.getElementById("birdpic").width = "1000";
+      document.getElementById("birdpic").height = "300";
+    }
+    notANiceName();
+
+
+
+    function test1(pictureName, variable){
+      //variable = 1
+      //var pictureName = pictureList[1] ik wou graag uit een array foto's laten kiezen
+      
+      var pictureName = "bug1.jpg"//voor nu even zo
+      var htmlResult = '<img id="birdpic" src=' + pictureName + '>'
+      document.body.innerHTML = htmlResult
+    }
+  //dit werkt. maar nu moet ik nog on click toe voegen
+  document.getElementById("birdpic").onclick = test1
+  //nu eindelijk een werkend function, graag had ik imput gehad uit een array voor meer foto's
+  </script>
+</body>
+</html>

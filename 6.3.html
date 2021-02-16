@@ -1,0 +1,21 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="bugArea" >
+       Bug description should come here.
+    </div>
+     <script>
+
+    var dungBeatle = {name = "Dungbeatle" , type = "beatle" , color = "black" , food = "dung"}
+
+    function description(bug){
+      return "a " bug.name + " is a " +bug.type + " is " + bug.color + " and can be seen eating " + bug.food
+    }
+
+    document.getElementById("bugArea").innerHTML = description(dungBeatle)
+
+     </script>
+
+  </body>
+</html>

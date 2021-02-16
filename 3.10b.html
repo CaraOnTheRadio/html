@@ -1,0 +1,23 @@
+<html>
+  <head>
+  </head>
+  <body>
+     <div id="redArea" style="margin:100px;
+                               background-color:red;
+                               padding:20px;
+                               colour:white" > click me
+     </div>
+     <div id="greenArea" style="margin:100px;
+                                background-color:#0a0;
+                                padding:20px;
+                                colour:white" > could there be a joke here?
+
+     </div>
+     <script>
+         function leopardJoke(){
+            document.getElementById("greenArea").innerHTML = "Because he was always spotted. </br> Why couldn't the leopard play hide and seek?"
+          }
+          document.getElementById("redArea").onclick = leopardJoke;
+     </script>
+  </body>
+</html>

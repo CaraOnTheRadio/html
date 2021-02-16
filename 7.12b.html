@@ -1,0 +1,31 @@
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>mathijs was here</title>
+</head>
+<body>
+  <select id="services">
+    <option value="Google">Google</option>
+    <option value="Han Account" selected>Han Account</option>
+    <option value="Twitter">Twitter</option>
+    <option value="Bank">Bank</option>
+  </select>
+  <input type="text" id="wwField" name="password"></input>
+  <button id="wwButton" >Password</button>
+  <div id="wwOutput" ></div>
+  <script>
+  function createPassword(passPhrase, service) {
+    var cryptoPhrase = "a7" + btoa(passPhrase + service) + "%H" ;
+    return cryptoPhrase
+  }
+  function generatePassphrase() {
+    var input = document.getElementById("wwField").value
+    var service = document.getElementById("services").value
+    document.getElementById("wwOutput").innerHTML = createPassword(input, service)
+  }
+  document.getElementById("wwButton").onclick = generatePassphrase
+
+  </script>
+</body>
+</html>

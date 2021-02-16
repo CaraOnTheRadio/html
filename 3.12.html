@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <style>
+    img {
+      position: absolute; /* this property allows you to set the position
+                             of the element using left: and top: properties */
+      left: 0px;
+      top:  100px;
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <!-- the step="any" attribute is needed to allow
+       slider values with digits after the decimal point -->
+  <input id="slider"
+        type="range"
+        step="any"
+        min="0"
+        max="1"
+        value="0"
+        style="width: 300px;">
+  <hr>
+
+  <img id="firstBird"  src="mousebird.jpg" style="left: 400px">
+  <img id="secondBird" src="crested_crane.jpg" style="left: 800px">
+
+  <script>
+    document.getElementById("firstBird").style.opacity = document.getElementById("slider").valueAsNumber //update de afbeeldingen gewoon
+    document.getElementById("secondBird").style.opacity = 1 - document.getElementById("slider").valueAsNumber //dit kan duidelijk ook mooier
+
+    console.log("script started")
+
+    function updateImages(){
+      console.log("updateImages started:", "slider value = ", document.getElementById("slider").valueAsNumber)
+      document.getElementById("firstBird").style.opacity = document.getElementById("slider").valueAsNumber
+      document.getElementById("secondBird").style.opacity = 1 - document.getElementById("slider").valueAsNumber // zorgt voor dat hij tegenovergestelde doet kan beter?
+      // TODO 3: The left of the first bird should move from 400 pixels to 0 pixels
+      //         when slider values go from 1 to 0.
+      //         The second bird should move from 400 pixels to 800 pixels when slider values
+      //         go from 0 to 1.
+      document.getElementById("firstBird").style.left = document.getElementById("slider").valueAsNumber * 400+"px"
+      document.getElementById("secondBird").style.left = document.getElementById("slider").valueAsNumber * 400+400+"px" //px moet en +400 maakt nieuw 0 punt
+
+      console.log("updateImages ended")
+    }
+
+    document.getElementById("slider").oninput = updateImages
+
+    console.log("script ended")
+  </script>
+</body>
+</html>

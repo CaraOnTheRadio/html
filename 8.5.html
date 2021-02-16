@@ -1,0 +1,26 @@
+<html>
+  <head>
+  </head>
+  <body>
+     </div>
+     <img src="Mustaffa.jpg" width="1150">
+     <div id="Area" style="margin:5px;
+                                background-color:#DC143C;
+                                padding:10px;
+                                colour:red" > Mustaffa
+     </div>
+     <script>
+     let counter = 0;
+     var theStory = [ "a lie",  "a second lie", "a secret"]
+     function Mustaffa(){
+       if(counter <=2 ){
+        document.getElementById("Area").innerHTML = theStory[counter]
+        counter++
+      } else {
+        counter = 0
+      }
+       }
+       document.getElementById("Area").onclick = Mustaffa
+     </script>
+  </body>
+</html>

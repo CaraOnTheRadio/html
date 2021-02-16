@@ -1,0 +1,110 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Safari with Jille</title>
+  <style>
+    body {
+      background-color: khaki;
+      padding: 40px;
+    }
+    #product1, #product2, #shoppingCart {
+      margin: 40px;
+      padding: 40px;
+      background-color: black;
+      color: khaki;
+      float: left;
+    }
+    #photo1, #photo2 {
+      width: 300px;
+    }
+    #buyButton1, #buyButton2 {
+      float: right;
+      padding: 4px;
+    }
+    #shoppingCart {
+      background-color: darkkhaki;
+      color: black;
+    }
+    #orderLine1, #orderLine2, #totalLine {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="headline">Jille's Photo Shop</h1>
+
+  <div id="product1">
+    <img id="photo1" src="sunbird.jpg"/>
+    <p id="caption1">Sunbird: €200 <button id="buyButton1">Buy photo</button><p>
+  </div>
+  <div id="product2">
+    <img id="photo2" src="giraffe.jpg"/>
+    <p id="caption2">Giraffe: €5000 <button id="buyButton2">Buy photo</button><p>
+  </div>
+  <div id="shoppingCart">
+    <h3>Your order:</h3>
+    <p id="orderLine1">
+      0 * sunbird = 0 euro
+    </p>
+    <p id="orderLine2">
+      0 * giraffe = 0 euro
+    </p>
+    <p id="discountLine">
+      Discount:
+      <select id="discountSelect">
+        <option value=0>none</option>
+        <option value=10>a bit</option>
+        <option value=50>a lot</option>
+      </select>
+    </p>
+    <hr>
+    <p id="totalLine">
+      total = 0 euro
+    </p>
+  </div>
+
+</body>
+<script>
+
+var birdsBought = 0
+var giraffesBought = 0
+
+function updateShoppingCard(){
+  document.getElementById("orderLine1").innerHTML = birdsBought + " * sunbird = " + birdsBought * 200 + " euro"
+  document.getElementById("orderLine2").innerHTML = giraffesBought + " * giraffe = " + giraffesBought * 5000 + " euro"
+}
+
+function buyBirdPhoto() {
+  birdsBought = birdsBought + 1
+  updateShoppingCard()
+  updateTotalLine()
+}
+function buyGiraffePhoto() {
+  giraffesBought = giraffesBought + 1
+  updateShoppingCard()
+  updateTotalLine()
+}
+
+function discountSelectUpdate(){
+  updateShoppingCard()
+  updateTotalLine()
+}
+
+document.getElementById("buyButton1").onclick = buyBirdPhoto
+document.getElementById("buyButton2").onclick = buyGiraffePhoto
+
+document.getElementById("discountSelect").onclick = discountSelectUpdate
+var value = document.getElementById("discountSelect").value
+console.log(value)
+
+function updateTotalLine(){
+  var price = (birdsBought*200 + giraffesBought*5000)
+  var discount = 0.01 * (100 - document.getElementById("discountSelect").value)
+  var totalPrice = price * discount
+  document.getElementById("totalLine").innerHTML = totalPrice
+}
+
+
+</script>
+</html>

@@ -1,0 +1,52 @@
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>mathijs was here</title>
+</head>
+<body>
+  <script>
+  var conan = {
+  name: "Conan",
+  stats: {
+    health: 800,
+    strength: 80,
+    intelligence: 30,
+    personality: 50
+  },
+  weapon: {
+    name: "Sword of endless fury",
+    damage: "15",
+    attack: "2d3 + 15"
+  },
+  class: "Warrior",
+  race: "Barbarian"
+  }
+  var orc = {
+  name: "Goronack",
+  stats: {
+    health: 50,
+    strength: 8,
+    intelligence: 30,
+    personality: 50
+  },
+  weapon: {
+    name: "Curiass",
+    damage: "5",
+    attack: "2d3 + 15"
+  },
+  class: "Warrior",
+  race: "Orc"
+  }
+
+function fight(player, enemy){
+var damage = enemy.weapon.damage * enemy.stats.strength
+var health = player.stats.health - damage
+player.stats.health = health
+return player
+}
+
+var conan = fight(conan,orc)
+  </script>
+</body>
+</html>

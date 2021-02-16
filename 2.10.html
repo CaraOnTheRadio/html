@@ -1,0 +1,20 @@
+<html>
+ <head>
+   <title>Comic Sans is niet mooi</title>
+
+ </head>
+ <body>
+   <img src="green_pidgeon.jpg" width="1150">
+   <h1 id="Title">Nice bird</h1>
+   <p id="caption"></p>
+   <script>
+      //document.getElementById("caption").style.padding = "hotdog"; 2.9
+      document.getElementById("caption").style.backgroundColor = "#e50055";
+      document.getElementById("caption").style.color = "white";
+      document.body.style.fontFamily = "Comic Sans MS"
+      document.getElementById("caption").style.padding = "250pt";
+      document.getElementById("caption").innerHTML = "de han is de hogeschool van arnhem en nijmegen";
+      document.getElementById("Title").innerHTML = document.getElementById("caption").innerHTML; //let op hoofdletters
+  </script>
+ </body>
+ </html>

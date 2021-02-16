@@ -1,0 +1,26 @@
+<html>
+  <head>
+  </head>
+  <body>
+     </div>
+     <div id="greenArea" style="margin:100px;
+                                background-color:#0a0;
+                                padding:20px;
+                                colour:white" > could there be a joke here?
+     </div>
+     <script>
+     let counter = 0;
+
+     function leopardJoke(){
+       if(counter === 0 ){
+        document.getElementById("greenArea").innerHTML = "Because he was always spotted. </br> Why couldn't the leopard play hide and seek?"
+        counter++
+      } else {
+        document.getElementById("greenArea").innerHTML = "haha haha"
+        counter = 0
+      }
+       }
+       document.getElementById("greenArea").onmousemove = leopardJoke
+     </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slideshow</title>
+  <style>
+
+    body {
+      background-color: khaki;
+    }
+
+    #slideShow {
+      position: relative;
+      width: 800px;
+      margin: 100px auto;
+      border: 100px solid white;
+      box-shadow: 3px 3px 18px 0px rgba(0,0,0,0.42);
+    }
+
+    #title {
+      font-family: "Avenir Next", "Avenir", sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ccc;
+      position: absolute;
+      top: -60px;
+      text-align: center;
+      width: 100%;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    #mainImage {
+      width: 800px;
+      border: none;
+    }
+
+    #nextButton {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 100px;
+      height: 100%;
+      opacity: 0.3;
+      background: none;
+      border: none;
+      font-size: 100px;
+      color: white;
+    }
+
+    #nextButton:hover {
+      opacity: 0.9;
+      background-color: rgba(255,255,255,0.3);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="slideShow">
+    <div id="title">Jille's Bug Gallery</div>
+    <image id="mainImage" src="bug1.jpg">
+    <button id="nextButton">»</button>
+  </div>
+  <script>
+
+    var pictureNames = [ "bug1.jpg",  "bug2.jpg",  "bug3.jpg",  "bug4.jpg",  "bug5.jpg",  "bug6.jpg", ]
+
+    for(var i=0; i<=5; i++;){
+      if (document.getElementById("mainImage").onclick = true)
+        document.getElementById("mainImage").src = pictureNames[i]
+    }
+
+
+  </script>
+</body>
+</html>
