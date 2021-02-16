@@ -1,0 +1,34 @@
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>mathijs was here</title>
+</head>
+<body>
+  <script>
+    // Function roughly estimates the amount of money a speeding ticket is going to cost.
+    function estimateFine(actualSpeed, speedLimit){
+      estimatedFine = 0;
+      speedAboveLimit = actualSpeed - speedLimit;
+      
+      if(speedAboveLimit < 5){
+        estimatedFine = 20;
+      }
+
+      if(speedAboveLimit > 20){
+        estimatedFine = 200;
+      }
+
+      if(speedAboveLimit > 30){
+        estimatedFine = 400;
+      }
+
+      if(speedAboveLimit > 40){
+        estimatedFine = 600;
+      }
+
+      return estimatedFine;
+    }
+  </script>
+</body>
+</html>
