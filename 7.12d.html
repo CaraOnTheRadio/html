@@ -5,6 +5,33 @@
   <title>mathijs was here</title>
 </head>
 <body>
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <img id="birb" src="crowned_hornbill.jpg" width="215">
+  <div style="background-image: url("crowned_hornbill.jpg");">
+  <p id="title">Check me gitHub</p>
+
   <select id="services">
     <option value="Google">Google</option>
     <option value="Han Account">Han Account</option>
@@ -26,7 +53,7 @@
   function generatePassphrase() {
     var input = document.getElementById("wwField").value
     var service = document.getElementById("services").value
-    password = createPassword(input, service)
+    var password = createPassword(input, service)
     document.getElementById("wwOutput").innerHTML = password
     return password
   }
@@ -38,10 +65,28 @@
   function clipHandler() {
     putOnClipboard(generatePassphrase())
   }
-//c
+
+  function revEncryp(cypherText) {
+    var res = cypherText.substring(2, cypherText.length - 2);
+    var decriptRes = atob(res)
+    // var passPhrase = decriptRes.substring(0, ?)
+    // var service = decriptRes.substring(?, decriptRes.length)
+    //return [passPhrase, service]
+    return decriptRes
+  }
+
+
+
   document.getElementById("wwButton").onclick = generatePassphrase
   document.getElementById("pButton").onclick = clipHandler
+
 
   </script>
 </body>
 </html>
+
+<!-- var str = "Hello world!";
+var res = str.substring(1, 4); // outputs "ell"
+
+var encodedString = btoa("Hello World") //outputs: "SGVsbG8gV29ybGQ="
+var normalString = atob(encodedString) //outputs: "Hello World!" -->
