@@ -4,33 +4,14 @@
   <meta content="utf-8" http-equiv="encoding">
   <title>mathijs was here</title>
 </head>
+<style>
+  body{
+    background-image: url("crowned_hornbill.jpg");
+    background-repeat: repeat;
+    background-size: 100%
+  }
+</style>
 <body>
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <img id="birb" src="crowned_hornbill.jpg" width="215">
-  <div style="background-image: url("crowned_hornbill.jpg");">
-  <p id="title">Check me gitHub</p>
 
   <select id="services">
     <option value="Google">Google</option>
@@ -39,21 +20,21 @@
     <option value="Bank">Bank</option>
     <option value="" selected>Empty</option>
   </select>
-    <input type="text" id="wwField" name="password"></input>
+    <input type="text" id="wwField" name="password" size="100%"></input>
     <button id="wwButton" >Password</button>
     <button id="pButton" >Copy</button>
     <div id="wwOutput" ></div>
   <script>
 
   function createPassword(passPhrase, service) {
-    var cryptoPhrase = "a7" + btoa(passPhrase + service) + "%H" ;
+    let cryptoPhrase = "a7" + btoa(passPhrase + service) + "%H" ;
     return cryptoPhrase
   }
 
   function generatePassphrase() {
-    var input = document.getElementById("wwField").value
-    var service = document.getElementById("services").value
-    var password = createPassword(input, service)
+    let input = document.getElementById("wwField").value
+    let service = document.getElementById("services").value
+    let password = createPassword(input, service)
     document.getElementById("wwOutput").innerHTML = password
     return password
   }
@@ -67,10 +48,10 @@
   }
 
   function revEncryp(cypherText) {
-    var res = cypherText.substring(2, cypherText.length - 2);
-    var decriptRes = atob(res)
-    // var passPhrase = decriptRes.substring(0, ?)
-    // var service = decriptRes.substring(?, decriptRes.length)
+    let res = cypherText.substring(2, cypherText.length - 2);
+    let decriptRes = atob(res)
+    // let passPhrase = decriptRes.substring(0, ?)
+    // let service = decriptRes.substring(?, decriptRes.length)
     //return [passPhrase, service]
     return decriptRes
   }
@@ -82,11 +63,12 @@
 
 
   </script>
+</div>
 </body>
 </html>
 
-<!-- var str = "Hello world!";
-var res = str.substring(1, 4); // outputs "ell"
+<!-- let str = "Hello world!";
+let res = str.substring(1, 4); // outputs "ell"
 
-var encodedString = btoa("Hello World") //outputs: "SGVsbG8gV29ybGQ="
-var normalString = atob(encodedString) //outputs: "Hello World!" -->
+let encodedString = btoa("Hello World") //outputs: "SGVsbG8gV29ybGQ="
+let normalString = atob(encodedString) //outputs: "Hello World!" -->
