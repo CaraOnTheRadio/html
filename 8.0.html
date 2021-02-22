@@ -1,30 +1,68 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
-  <title>mathijs was here</title>
+  <title>Mexican</title>
+  <style type="text/css">
+.button {
+  font-size: 16px;
+}
+.score{
+  font-size: 2em;
+  }
+  </style>
+
 </head>
 <body>
-  <script>
-    function canJoinTheATeam( person ) {
-      if(person.isMale && person.length > 200 && person.squattingWeight > 150) {
-        return true
-      }
-      return false
-    }
+  <div style="margin: 8%;">
+    <div id="scoreToBeatDiv">Score to beat = 0</div><br>
+    <div id="maxTriesDiv">max tries = 3</div><br>
+    <div id="currentTriesDiv">current tries = 0</div><br>
+    <button id="rollBothButton" class="button">Roll both</button><br>
+    <button id="nextPlayerButton" class="button">Next player</button><br>
+    <div id="scoreDiv" class="score">0</div>
+  </div>
+<script type="text/javascript">
+var scoreToBeat = 0
+var maxNumberOfTries = 3
+var isFirstPlayer = true
+var currentTries = 0
+var currentScore = 0
 
-  let jille = { length: 198,
-                squattingWeight: 20,
-                isMale: true
-              }
-  let robert = { length: 187,
-                 squattingWeight: 230,
-                 isMale: true
-               }
+function calculateScore(){
+  return Math.floor(Math.random() * 600) + 1 // generates a random number between 1 and 600
+}
 
-  console.log("Can Jille join the A-team?",  canJoinTheATeam(jille) )
-  console.log("Can Robert join the A-team?",  canJoinTheATeam(robert) )
-  </script>
+function nextPlayer(){
+  if(isFirstPlayer){
+    maxNumberOfTries = currentTries
+    document.getElementById("maxTriesDiv").innerHTML = "current tries = " + maxNumberOfTries
+    isFirstPlayer = false
+  }
+  if(currentScore > scoreToBeat)
+    scoreToBeat = currentScore
+  resetForNewTurn()
+
+}
+
+function rollBothDice(){
+  currentScore = calculateScore()
+  document.getElementById("scoreDiv").innerHTML = currentScore
+  currentTries += 1;
+  document.getElementById("currentTriesDiv").innerHTML = "current tries = " + currentTries
+}
+
+function resetForNewTurn(){
+  currentTries = 0
+  currentScore = 0
+  document.getElementById("nextPlayerButton").disabled = false
+  document.getElementById("rollBothButton").disabled = false
+  document.getElementById("currentTriesDiv").innerHTML = "current tries = " + currentTries
+  document.getElementById("scoreToBeatDiv").innerHTML = "Score to beat = " + scoreToBeat
+  document.getElementById("scoreDiv").innerHTML = currentScore
+}
+ document.getElementById("rollBothButton").onclick = rollBothDice
+ document.getElementById("nextPlayerButton").onclick = nextPlayer
+
+ </script>
 </body>
-</html>
-// ook voor 8.9b
+</html>V
