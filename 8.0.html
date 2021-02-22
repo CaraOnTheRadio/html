@@ -49,6 +49,9 @@ function rollBothDice(){
   document.getElementById("scoreDiv").innerHTML = currentScore
   currentTries += 1;
   document.getElementById("currentTriesDiv").innerHTML = "current tries = " + currentTries
+
+  if (currentScore < scoreToBeat)
+    document.getElementById("nextPlayerButton").disabled = true
 }
 
 function resetForNewTurn(){
