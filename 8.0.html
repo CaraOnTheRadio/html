@@ -35,13 +35,14 @@ function calculateScore(){
 function nextPlayer(){
   if(isFirstPlayer){
     maxNumberOfTries = currentTries
-    document.getElementById("maxTriesDiv").innerHTML = "current tries = " + maxNumberOfTries
+      document.getElementById("maxTriesDiv").innerHTML = "max tries = " + maxNumberOfTries
     isFirstPlayer = false
   }
-  if(currentScore > scoreToBeat)
+  if(currentScore > scoreToBeat){
     scoreToBeat = currentScore
-  resetForNewTurn()
+  }
 
+  resetForNewTurn()
 }
 
 function rollBothDice(){
@@ -52,6 +53,13 @@ function rollBothDice(){
 
   if (currentScore < scoreToBeat)
     document.getElementById("nextPlayerButton").disabled = true
+  else
+    document.getElementById("nextPlayerButton").disabled = false
+
+  if (maxNumberOfTries == currentTries)
+    document.getElementById("rollBothButton").disabled = true
+  else
+    document.getElementById("rollBothButton").disabled = false
 }
 
 function resetForNewTurn(){
@@ -60,7 +68,7 @@ function resetForNewTurn(){
   document.getElementById("nextPlayerButton").disabled = false
   document.getElementById("rollBothButton").disabled = false
   document.getElementById("currentTriesDiv").innerHTML = "current tries = " + currentTries
-  document.getElementById("scoreToBeatDiv").innerHTML = "Score to beat = " + scoreToBeat
+  document.getElementById("scoreToBeatDiv").innerHTML = "score to beat = " + scoreToBeat
   document.getElementById("scoreDiv").innerHTML = currentScore
 }
  document.getElementById("rollBothButton").onclick = rollBothDice
