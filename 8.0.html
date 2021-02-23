@@ -16,9 +16,12 @@
   <div style="margin: 8%;">
     <div id="scoreToBeatDiv">Score to beat = 0</div><br>
     <div id="maxTriesDiv">max tries = 3</div><br>
+    <div id="shots">shots = 0</div><br>
     <div id="currentTriesDiv">current tries = 0</div><br>
     <button id="rollBothButton" class="button">Roll both</button><br>
     <button id="nextPlayerButton" class="button">Next player</button><br>
+    <button id="dice1" class="button">dice 1</button><br>
+    <button id="dice2" class="button">dice 2</button><br>
     <div id="scoreDiv" class="score">0</div>
   </div>
 <script type="text/javascript">
@@ -27,9 +30,46 @@ var maxNumberOfTries = 3
 var isFirstPlayer = true
 var currentTries = 0
 var currentScore = 0
+var vDie1 = 0
+var vDie2 = 0
+var shots = 0
 
-function calculateScore(){
-  return Math.floor(Math.random() * 600) + 1 // generates a random number between 1 and 600
+
+function scoreUpdate(){
+  currentScore = vDie1 + vDie2
+  currentTries += 1
+  if(vDie1 == vDie2)
+    currentScore*=100
+  if(vDie1 != vDie2 && vDie1 + vDie2 != 3){
+    if(vDie1>vDie2){
+      currentScore = 10*vDie1 + vDie2
+    }
+    if(vDie1<vDie2){
+      currentScore = 10*vDie2 + vDie1
+    }
+  }
+  if(currentScore == 31){
+    window.alert("Drink en reroll")
+  }
+
+  if(currentScore == 21){
+    window.alert("Mexican")
+    shots += 1
+    nextPlayer()
+  }
+
+  if(currentScore > scoreToBeat && !isFirstPlayer){
+    scoreToBeat = currentScore
+  }
+  if(isFirstPlayer){
+    scoreToBeat = currentScore
+  }
+  document.getElementById("scoreDiv").innerHTML = currentScore
+  document.getElementById("currentTriesDiv").innerHTML = "current tries = " + currentTries
+  document.getElementById("nextPlayerButton").disabled = (currentScore < scoreToBeat)
+  document.getElementById("rollBothButton").disabled = (maxNumberOfTries == currentTries)
+  document.getElementById("scoreToBeatDiv").innerHTML = "score to beat = " + scoreToBeat
+  document.getElementById("shots").innerHTML = "shots =" + shots
 }
 
 function nextPlayer(){
@@ -38,28 +78,32 @@ function nextPlayer(){
       document.getElementById("maxTriesDiv").innerHTML = "max tries = " + maxNumberOfTries
     isFirstPlayer = false
   }
-  if(currentScore > scoreToBeat){
-    scoreToBeat = currentScore
-  }
+  scoreUpdate()
 
   resetForNewTurn()
 }
 
+
 function rollBothDice(){
-  currentScore = calculateScore()
-  document.getElementById("scoreDiv").innerHTML = currentScore
-  currentTries += 1;
-  document.getElementById("currentTriesDiv").innerHTML = "current tries = " + currentTries
+  die1()
+  die2()
+  document.getElementById("dice1").disabled = false
+  document.getElementById("dice2").disabled = false
+  currentTries += -2
 
-  if (currentScore < scoreToBeat)
-    document.getElementById("nextPlayerButton").disabled = true
-  else
-    document.getElementById("nextPlayerButton").disabled = false
+  scoreUpdate()
+}
 
-  if (maxNumberOfTries == currentTries)
-    document.getElementById("rollBothButton").disabled = true
-  else
-    document.getElementById("rollBothButton").disabled = false
+function die1(){
+  vDie1 = Math.round((Math.random()*5)+1)
+  document.getElementById("dice1").innerHTML = vDie1
+  scoreUpdate()
+}
+
+function die2(){
+  vDie2 = Math.round((Math.random()*5)+1)
+  document.getElementById("dice2").innerHTML = vDie2
+  scoreUpdate()
 }
 
 function resetForNewTurn(){
@@ -70,9 +114,19 @@ function resetForNewTurn(){
   document.getElementById("currentTriesDiv").innerHTML = "current tries = " + currentTries
   document.getElementById("scoreToBeatDiv").innerHTML = "score to beat = " + scoreToBeat
   document.getElementById("scoreDiv").innerHTML = currentScore
+  document.getElementById("dice1").disabled = true
+  document.getElementById("dice2").disabled = true
 }
+
+ resetForNewTurn()
  document.getElementById("rollBothButton").onclick = rollBothDice
  document.getElementById("nextPlayerButton").onclick = nextPlayer
+ document.getElementById("dice1").onclick = die1
+ document.getElementById("dice2").onclick = die2
+
+
+
+
 
  </script>
 </body>
