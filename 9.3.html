@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maya's Game 0.1</title>
+  <style>
+    #world {
+      position: relative;
+      margin: 100px;
+    }
+    #statusText {
+      position: absolute;
+      top: -40px;
+    }
+    #player {
+      position: absolute;
+      transition: top 0.3s, left 0.3s;
+    }
+    #buttons {
+      position: absolute;
+      top: 250px;
+      left: 750px;
+      text-align: center;
+    }
+    #buttons button {
+      font-size: 20px;
+      color: white;
+      background-color: black;
+      width: 60px;
+      height: 30px;
+      border: none;
+      margin: 3px;
+    }
+    #buttons button:hover {
+      background-color: #444;
+    }
+    #buttons button:active {
+      background-color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div id="world">
+    <img src="./world.png">
+    <img id="player" src="player-down.png" style="top:267px; left:284px;">
+  </div>
+  <div id="buttons">
+    <button id="upButton">⬆︎</button><br>
+    <button id="leftButton">⬅︎</button>
+    <button id="rightButton">➡︎</button><br>
+    <button id="downButton">⬇︎</button>
+  </div>
+
+  <script>
+
+    function getElById(id) {
+      return document.getElementById(id)
+    }
+
+    var squareSize = 50
+
+    var player = {
+      x: 300,
+      y: 300,
+    }
+
+    function moveLeft() {
+      movePlayer( -1, 0 )  // move 1 step to left
+      getElById("player").src = "player-left.png"
+    }
+    getElById("leftButton").onclick = moveLeft
+
+    function moveRight() {
+      movePlayer( 1, 0 )
+      getElById("player").src = "player-right.png"
+    }
+    getElById("rightButton").onclick = moveRight
+
+    function moveUp() {
+      movePlayer( 0, -1 )
+      getElById("player").src = "player-up.png"
+    }
+    getElById("upButton").onclick = moveUp
+
+    function moveDown() {
+      movePlayer( 0, 1 )
+      getElById("player").src = "player-down.png"
+    }
+    getElById("downButton").onclick = moveDown
+
+    function isInRectangle( x,y, left, top, right, bottom ) {
+        return x >= left && x < right && y >= top && y < bottom
+        // && means AND
+    }
+
+    function movePlayer( xDistance, yDistance ) {
+      var stepSize = squareSize / 2;
+      var newX = player.x + xDistance * stepSize
+      var newY = player.y + yDistance * stepSize
+
+      if( newX < 0 || newX > 600 || newY < 0 || newY > 600 ) {
+        return
+      }
+      }
+
+      function handleKeyPress(eventInfo) {
+        eventInfo.preventDefault();
+        console.log(eventInfo.Arrow)
+
+         if (eventInfo.shiftKey)
+
+         switch(eventInfo.key){
+           case "ArrowUp":
+            moveUp();
+           break;
+           case "ArrowLeft":
+            moveLeft();
+           break;
+           case "ArrowDown":
+            moveDown();
+           break;
+           case "ArrowRight":
+            moveRight();
+           break;
+           case "ArrowRight":
+            moveRight();
+           break;
+      }
+    }
+    document.onkeydown = handleKeyPress  // when the user presses a key, call 'handleKeyPress'
+
+      var isInLake = isInRectangle( newX, newY, 0, 450, 150, 600)
+      var isInSea  = newY < 100
+      if( isInLake || isInSea ) { return }
+
+      player.x = newX
+      player.y = newY
+      getElById("player").style.left = (player.x - 16) + "px"
+      getElById("player").style.top = (player.y - 32)  + "px"
+    }
+
+    </script>
+</body>
+</html>
