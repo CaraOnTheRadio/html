@@ -1,18 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title></title>
-  </head>
-  <body>
-    <input type="text" id="inputValue">
-    <button id="doubleIt">Calculate Double</button>
+<head>
+  <title></title>
+</head>
+<body>
 
-    <script type="text/javascript">
-      function alertDouble(){
-        var value = Number(document.getElementById("inputValue").value)
-        alert(value + value)
-      }
-      document.getElementById("doubleIt").onclick = alertDouble
-    </script>
-  </body>
+<div>Street: <input id="streetField" type="text"></div><br>
+<div>Number: <input id="houseNumberField" type="text"></div><br>
+<div>Postcode: <input id="postcodeField" type="text"></div><br>
+<button id="validateButton">Validate</button>
+
+<script type="text/javascript">
+  function isPostcode(inputString) {
+    var inputNoSpaces = inputString.replaceAll(" ", "");
+
+    if( inputNoSpaces.length != 6 ) {
+      return false;
+    }
+    var firstFourCharacters = inputNoSpaces.substring(0, 4);
+    var lastTwoCharacters   = inputNoSpaces.substring(4, 6);
+    var firstFourNumber = Number(firstFourCharacters);
+
+    if( isNaN(firstFourNumber) ) {
+      return false;
+    }
+    if( ! isNaN(Number(lastTwoCharacters)) ) {
+      return false;
+    }
+    return true;
+  }
+
+  function checkForm(){
+    var postcodeInput = document.getElementById("postcodeField").value;
+    if( ! isPostcode(postcodeInput) ) {
+      document.getElementById("postcodeField").style.backgroundColor = "#fcc" // light red
+    } else {
+      document.getElementById("postcodeField").style.backgroundColor = "#cfc" // light green
+    }
+  }
+
+  document.getElementById("validateButton").onclick = checkForm
+
+  </script>
+</body>
 </html>
