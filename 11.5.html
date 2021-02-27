@@ -30,14 +30,25 @@
     return true;
   }
 
+  function isHouseNumber(inputString){
+    return !isNaN(Number(inputString))     
+  }
+
   function checkForm(){
     var postcodeInput = document.getElementById("postcodeField").value;
+    if( ! isHouseNumber(housecodeInput) ) {
+      document.getElementById("houseNumberField").style.backgroundColor = "#fcc" // light red
+    } else {
+      document.getElementById("houseNumberField").style.backgroundColor = "#cfc" // light green
+    }
+
     if( ! isPostcode(postcodeInput) ) {
       document.getElementById("postcodeField").style.backgroundColor = "#fcc" // light red
     } else {
       document.getElementById("postcodeField").style.backgroundColor = "#cfc" // light green
     }
   }
+
 
   document.getElementById("validateButton").onclick = checkForm
 
