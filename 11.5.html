@@ -36,7 +36,7 @@
 
   function checkForm(){
     var postcodeInput = document.getElementById("postcodeField").value;
-    var housecodeInput = document.getElementById("housecodeInput").value;
+    var housecodeInput = document.getElementById("houseNumberField").value;
     if( ! isHouseNumber(housecodeInput) ) {
       document.getElementById("houseNumberField").style.backgroundColor = "#fcc" // light red
     } else {
