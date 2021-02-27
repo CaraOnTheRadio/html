@@ -31,11 +31,12 @@
   }
 
   function isHouseNumber(inputString){
-    return !isNaN(Number(inputString))     
+    return !isNaN(Number(inputString))
   }
 
   function checkForm(){
     var postcodeInput = document.getElementById("postcodeField").value;
+    var housecodeInput = document.getElementById("housecodeInput").value;
     if( ! isHouseNumber(housecodeInput) ) {
       document.getElementById("houseNumberField").style.backgroundColor = "#fcc" // light red
     } else {
