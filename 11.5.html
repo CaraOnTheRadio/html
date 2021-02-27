@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <input type="text" id="inputValue">
+    <button id="doubleIt">Calculate Double</button>
+
+    <script type="text/javascript">
+      function alertDouble(){
+        var value = Number(document.getElementById("inputValue").value)
+        alert(value + value)
+      }
+      document.getElementById("doubleIt").onclick = alertDouble
+    </script>
+  </body>
+</html>
