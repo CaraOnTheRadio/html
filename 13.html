@@ -7,15 +7,29 @@
   <h3>Hi there!</h3>
 
   <script>
-    var maxRepetitionsAsString = prompt("How many repetitions would you like?")
-    var maxRepetitionsAsNumber = Number(maxRepetitionsAsString)
+    var maxRepetitionsAsNumber
+    var maxRepetitionsAsString
+    function startUp(){
+      maxRepetitionsAsString = prompt("How many repetitions would you like?")
+      maxRepetitionsAsNumber = Number(maxRepetitionsAsString)
+    }
+
+    startUp()
+
+    if(!Number.isInteger(maxRepetitionsAsNumber))
+      console.log("hold")
+      startUp()
+
+
 
     var repCounter = 0
-    while( repCounter != maxRepetitionsAsNumber ) {
+    while( repCounter != maxRepetitionsAsNumber) {
       alert("Doing repetition nr. " + repCounter +
             "\ncontinuing upto: " + maxRepetitionsAsNumber )
       repCounter++
     }
+
+
     document.body.innerHTML = "<h1>Done repetition!</h1>"
 
   </script>
