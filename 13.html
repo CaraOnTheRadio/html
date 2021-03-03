@@ -37,12 +37,25 @@
     console.log(repCounter)
     var totalDuration = 0
 
+    console.log(songList(2400, thePlaylist))
+
+
     while( repCounter != maxRepetitionsAsNumber && totalDuration + thePlaylist[repCounter].duration <= 2400) {
-      totalDuration += thePlaylist[repCounter].duration
-      alert("Now playing: " + thePlaylist[repCounter].title + " Total play time: " + totalDuration)
-      repCounter++
+     totalDuration += thePlaylist[repCounter].duration
+     alert("Now playing: " + thePlaylist[repCounter].title + " Total play time: " + totalDuration)
+     repCounter++
     }
 
+    function songList(maxDuration, playL){
+      let funcCounter = 0
+      while(totalDuration + playL[funcCounter].duration <= maxDuration) {
+       totalDuration += playL[funcCounter].duration
+       var newList = []
+       newList.push(playL[funcCounter].title)
+       funcCounter++
+      }
+     return newList
+    }
 
     document.body.innerHTML = "<h1>"+totalDuration+"</h1>"
 
