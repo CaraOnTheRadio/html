@@ -37,11 +37,12 @@
     console.log(repCounter)
     var totalDuration = 0
 
-    while( repCounter != maxRepetitionsAsNumber) {
-      totalDuration = totalDuration + thePlaylist[repCounter].duration
-      alert("Now playing: " + thePlaylist[repCounter].title + " " + totalDuration)
+    while( repCounter != maxRepetitionsAsNumber && totalDuration + thePlaylist[repCounter].duration <= 2400) {
+      totalDuration += thePlaylist[repCounter].duration
+      alert("Now playing: " + thePlaylist[repCounter].title + " Total play time: " + totalDuration)
       repCounter++
     }
+
 
     document.body.innerHTML = "<h1>"+totalDuration+"</h1>"
 
