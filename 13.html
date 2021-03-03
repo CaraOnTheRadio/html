@@ -50,6 +50,19 @@
      return newList
     }
 
+    function longBoi(playL){
+      let current = playL[0]
+      for(var i=1; i<playL.length ;i++){
+        if(playL[i].duration > current.duration) {
+          current = playL[i]
+        }
+      }
+      return current
+    }
+
+    var longestSong = longBoi( thePlaylist );  // create you own function name
+    console.log( "The longest song is", longestSong.title, "by", longestSong.artist);
+
     document.body.innerHTML = "<h1>"+totalDuration+"</h1>"
 
   </script>
