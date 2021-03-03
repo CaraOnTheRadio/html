@@ -35,6 +35,7 @@
     var totalDuration = 0
     console.log(songList(2400, thePlaylist))
 
+<<<<<<< HEAD
 
     for(var repCounter=0; repCounter != maxRepetitionsAsNumber && totalDuration + thePlaylist[repCounter].duration <= 2400; i++) {
      totalDuration += thePlaylist[repCounter].duration
@@ -62,6 +63,14 @@
 
     var longestSong = longBoi( thePlaylist );  // create you own function name
     console.log( "The longest song is", longestSong.title, "by", longestSong.artist);
+=======
+    while( repCounter != maxRepetitionsAsNumber && totalDuration + thePlaylist[repCounter].duration <= 2400) {
+      totalDuration += thePlaylist[repCounter].duration
+      alert("Now playing: " + thePlaylist[repCounter].title + " Total play time: " + totalDuration)
+      repCounter++
+    }
+
+>>>>>>> b4165b9c65aab06992eee009bd869cb6c3c7b850
 
     document.body.innerHTML = "<h1>"+totalDuration+"</h1>"
 
