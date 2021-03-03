@@ -35,13 +35,15 @@
     console.log(maxRepetitionsAsNumber)
     var repCounter = 0
     console.log(repCounter)
+    var totalDuration = 0
+
     while( repCounter != maxRepetitionsAsNumber) {
-      alert("Now playing: " + thePlaylist[repCounter].title)
+      totalDuration = totalDuration + thePlaylist[repCounter].duration
+      alert("Now playing: " + thePlaylist[repCounter].title + " " + totalDuration)
       repCounter++
     }
 
-
-    document.body.innerHTML = "<h1>Done repetition!</h1>"
+    document.body.innerHTML = "<h1>"+totalDuration+"</h1>"
 
   </script>
 
