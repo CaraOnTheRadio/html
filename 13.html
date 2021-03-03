@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h3>Hi there!</h3>
+
+  <script>
+    var maxRepetitionsAsString = prompt("How many repetitions would you like?")
+    var maxRepetitionsAsNumber = Number(maxRepetitionsAsString)
+
+    var repCounter = 0
+    while( repCounter != maxRepetitionsAsNumber ) {
+      alert("Doing repetition nr. " + repCounter +
+            "\ncontinuing upto: " + maxRepetitionsAsNumber )
+      repCounter++
+    }
+    document.body.innerHTML = "<h1>Done repetition!</h1>"
+
+  </script>
+
+</body>
+</html>
