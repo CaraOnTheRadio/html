@@ -11,7 +11,7 @@
   var theContext = theCanvas.getContext('2d')
   var theRepeat = theCanvas.getContext('3d')
 
-
+  // convert from data-units
   function canvasX(numChildren) {
     return 30 + numChildren * 100
   }
@@ -30,37 +30,42 @@
 
   function repeat(){
 
-    for(var i=0; i<11; i++){
+    for(var i=0; i<12; i++){
       theContext.beginPath()
-      theContext.moveTo(canvasX(i),0)
-      theContext.lineTo(canvasX(i),500)
-
-      theContext.moveTo(0,canvasY(i))
-      theContext.lineTo(500,canvasY(i))
+      theContext.moveTo(50*i,0)
+      theContext.lineTo(50*i,500) //x as
+      //theContext.stroke()
+      //theContext.beginPath() // moet dit 2x ik snap dit nog niet goed
+      theContext.moveTo(0,50*i) // dit geeft de start positie aan neem ik aan
+      theContext.lineTo(500,50*i) //zou ik dit in minder dan 8 context kunnen doen?
       theContext.stroke()
       theContext.strokeStyle = "#CCC";
-
-      var ylabel = canvasY(i)
+      // hoe voeg ik kleur toe?
+      var ylabel = i*1
       var y = ylabel.toString();
-
-      var xlabel = canvasX(i)
-      var x = 500 - ylabel.toString(); // niet netjes 500 moet vervangen worden
-
-      theContext.fillStyle = "black"
-      theContext.fillFont = "normal 10px sans-serif"
-      theContext.fillText(y, canvasX(i), 500)
+      
+      var xlabel = 100 - i*10
+      var x = xlabel.toString();
 
       theContext.fillStyle = "black"
-      theContext.fillFont = "normal 10px sans-serif"
-      theContext.fillText(x, 0, canvasY(i))
+      theContext.fillFont = "bold 40px Georgia"
+      theContext.fillText(y, 50*i, 500) // moet nog i*iets = string
+
+      theContext.fillStyle = "black"
+      theContext.fillFont = "bold 40px Georgia"
+      theContext.fillText(x, 0, 50*i) //moet nog i*iets = string
     }
 
   }
 
+  function test(){
+
+  }
+
+  //test()
   repeat()
   base()
 
-// canvas groote is nog niet goed
 
   </script>
 
