@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h3></h3>
+  <canvas id="graph" width=500 height=500 ></canvas>
+  <script>
+  var theCanvas = document.getElementById('graph')
+  var theContext = theCanvas.getContext('2d')
+  var theRepeat = theCanvas.getContext('3d')
+
+
+  function canvasX(numChildren) {
+    return 30 + numChildren * 100
+  }
+
+  function canvasY(age) {
+    return 510 - age * 5
+  }
+
+  function base(){
+    theContext.beginPath()
+    theContext.moveTo(0,0)
+    theContext.lineTo(0,500)
+    theContext.lineTo(500,500)
+    theContext.stroke()
+  }
+
+  function repeat(){
+
+    for(var i=0; i<11; i++){
+      theContext.beginPath()
+      theContext.moveTo(canvasX(i),0)
+      theContext.lineTo(canvasX(i),500)
+
+      theContext.moveTo(0,canvasY(i))
+      theContext.lineTo(500,canvasY(i))
+      theContext.stroke()
+      theContext.strokeStyle = "#CCC";
+
+      var ylabel = canvasY(i)
+      var y = ylabel.toString();
+
+      var xlabel = canvasX(i)
+      var x = 500 - ylabel.toString(); // niet netjes 500 moet vervangen worden
+
+      theContext.fillStyle = "black"
+      theContext.fillFont = "normal 10px sans-serif"
+      theContext.fillText(y, canvasX(i), 500)
+
+      theContext.fillStyle = "black"
+      theContext.fillFont = "normal 10px sans-serif"
+      theContext.fillText(x, 0, canvasY(i))
+    }
+
+  }
+
+  repeat()
+  base()
+
+// canvas groote is nog niet goed
+
+  </script>
+
+</body>
+</html>
