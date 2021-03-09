@@ -103,8 +103,9 @@
       canvasContext.font = "180px Georgia"
       canvasContext.fillText(year, 50, 500)
 
-      for(var i=0;i<218;i++){
+      for(var i=0;i<countryData.length;i++){
         dataDisc(countryData[i], year);
+        console.log(i)
       }
     }
 
