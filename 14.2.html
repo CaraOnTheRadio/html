@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+	  <canvas id="graph" width="940" height="530"></canvas>
+    <script src="gapminderData.js"></script>
+    <script>
+    var countryData
+		var theCanvas = document.getElementById('graph');
+		var canvasContext = theCanvas.getContext('2d');
+
+
+    function bubbleRadiusForPopulation(population) {
+      var radius = 0.56419 * Math.sqrt( population ) // According to Wolfram Alpha.
+      var reducedRadius = radius / 500               // Reduce radius to look nice in graph.
+      return reducedRadius
+    }
+
+		function canvasX(numChildren) {
+		  return 30 + numChildren * 100
+		}
+
+		function canvasY(age) {
+		  return 510 - age * 5
+		}
+
+		function drawGraphBase(){
+			drawHorizontalGrid()
+			drawVerticalGrid()
+			drawAxis()
+		}
+
+		function drawVerticalGrid(){
+			canvasContext.strokeStyle = '#ccc'
+			canvasContext.lineWidth = 1
+			for(i=0; i < 10; i++){
+				canvasContext.beginPath()
+				canvasContext.moveTo( canvasX(i), canvasY(0) )
+				canvasContext.lineTo( canvasX(i), canvasY(100) )
+				canvasContext.fillText(i,canvasX(i),canvasY(0) + 20 )
+				canvasContext.stroke()
+			}
+		}
+
+		function drawHorizontalGrid(){
+			canvasContext.strokeStyle = '#ccc'
+			canvasContext.lineWidth = 1
+			for(i=0; i < 101; i = i + 10 ){
+				canvasContext.beginPath()
+				canvasContext.moveTo( canvasX(0), canvasY(i) )
+				canvasContext.lineTo( canvasX(9), canvasY(i) )
+				canvasContext.fillText(i,canvasX(0) - 20 ,canvasY(i) )
+				canvasContext.stroke()
+			}
+		}
+
+		function drawAxis(){
+				//draw assen
+			canvasContext.strokeStyle = 'black'
+			canvasContext.lineWidth = 2
+			canvasContext.beginPath()
+			canvasContext.moveTo( canvasX(0), canvasY(0) )
+			canvasContext.lineTo( canvasX(0), canvasY(100))
+			canvasContext.moveTo( canvasX(0), canvasY(0) )
+			canvasContext.lineTo( canvasX(9), canvasY(0) )
+			canvasContext.stroke()
+		}
+
+    function drawDisc(canvasContext, x, y, radius, color) {
+      canvasContext.beginPath()
+      canvasContext.arc(x,y,radius,0,Math.PI*2,false)
+      canvasContext.fillStyle = color
+      canvasContext.fill()
+      canvasContext.fillStyle = "black"
+      canvasContext.stroke()
+    }
+
+    drawGraphBase()
+
+    function dataDisc(data, year){
+      var trueYear = year - 1800
+      var color = data.region //produceerd type error?
+      var lifeExpectancy = canvasY(data.lifeExpectancy[trueYear]) //produceerd type error?
+      var birthsPerWoman = canvasX(data.birthsPerWoman[trueYear]) //produceerd type error?
+      var population = bubbleRadiusForPopulation(data.population[trueYear]) //produceerd type error?
+      if (color == "asia"){
+        color = "rgb(127, 235, 0)"
+      }  else if (color== "africa"){
+        color = "rgb(0, 213, 233)"
+      }  else if (color== "americas"){
+        color = "rgb(255, 88, 114)"
+      }  else{
+        color = "rgb(255, 231, 0)"
+      }
+      drawDisc(canvasContext, birthsPerWoman, lifeExpectancy, population, color)
+      console.log(data.region)
+    }
+
+    function userDisc(year){
+      canvasContext.fillStyle = "grey"
+      canvasContext.font = "180px Georgia"
+      canvasContext.fillText(year, 50, 500)
+
+      for(var i=0;i<218;i++){
+        dataDisc(countryData[i], year);
+      }
+    }
+
+    function tickTack(){  //doet niks
+      var currentYear = 1800;
+      console.log(currentYear); //doet niks??
+    }
+
+    userDisc(1945)
+
+    tickTack()
+
+    </script>
+  </body>
+</html>
