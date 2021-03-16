@@ -1,0 +1,136 @@
+.grids{
+  display: flex;
+}
+
+.grid-left {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: blue;
+  margin: 5px
+}
+
+.grid-right {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: blue;
+  margin: 5px
+}
+
+.grid div{
+  width: 40px;
+  height: 40px;
+}
+
+.ships-dock{
+  width: 400px;
+  height: 400px;
+  margin: 5px;
+  background-color: darkblue;
+}
+
+
+.destroyer-grid{
+  width: 80px;
+  height: 40px;
+  background-color: red;
+  margin: 5px;
+  display: flex;
+}
+.destroyer-grid-vertical{
+  width: 40px;
+  height: 80px;
+  background-color: red;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cruiser-grid{
+  width: 120px;
+  height: 40px;
+  background-color: orange;
+  margin: 5px;
+  display: flex;
+}
+.cruiser-grid-vertical{
+  width: 40px;
+  height: 120px;
+  background-color: orange;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.submarine-grid{
+  width: 120px;
+  height: 40px;
+  background-color: pink;
+  margin: 5px;
+  display: flex;
+}
+.submarine-grid-vertical{
+  width: 40px;
+  height: 120px;
+  background-color: pink;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.battleship-grid{
+  width: 160px;
+  height: 40px;
+  background-color: brown;
+  margin: 5px;
+  display: flex;
+}
+.battleship-grid-vertical{
+  width: 40px;
+  height: 160px;
+  background-color: brown;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.carrier-grid{
+  width: 200px;
+  height: 40px;
+  background-color: black;
+  margin: 5px;
+  display: flex;
+}
+.carrier-grid-vertical{
+  width: 40px;
+  height: 200px;
+  background-color: black;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.ship div{
+  width: 40px;
+  height: 40px;
+}
+
+.destroyer{
+  background-color: red;
+}
+.cruiser{
+  background-color: orange;
+}
+.submarine{
+  background-color: pink;
+}
+.battleship{
+  background-color: brown;
+}
+.carrier{
+  background-color: black;
+}

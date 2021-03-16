@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Battle Ships</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="grids">
+      <div class="grid grid-left"></div>
+      <div class="grid grid-right"></div>
+    </div>
+
+    <div class="background info">
+      <button id="start">Start Game</button>
+      <button id="rotate">Rotate</button>
+      <h3 id="turn"> Turn </h3>
+      <h3 id="info"></h3>
+    </div>
+
+  <div class="ships-dock">
+
+    <div class="ship destroyer-grid" draggable="true">
+      <div id="destroyer-0"></div>
+      <div id="destroyer-1"></div>
+    </div>
+
+    <div class="ship cruiser-grid" draggable="true">
+      <div id="cruiser-0"></div>
+      <div id="cruiser-1"></div>
+      <div id="cruiser-2"></div>
+    </div>
+
+    <div class="ship submarine-grid" draggable="true">
+      <div id="submarine-0"></div>
+      <div id="submarine-1"></div>
+      <div id="submarine-2"></div>
+    </div>
+
+    <div class="ship battleship-grid" draggable="true">
+      <div id="battleship-0"></div>
+      <div id="battleship-1"></div>
+      <div id="battleship-2"></div>
+      <div id="battleship-3"></div>
+    </div>
+
+    <div class="ship carrier-grid" draggable="true">
+      <div id="carrier-0"></div>
+      <div id="carrier-1"></div>
+      <div id="carrier-2"></div>
+      <div id="carrier-3"></div>
+      <div id="carrier-4"></div>
+    </div>
+  </div>
+  </div>
+    <script>
+    const leftGrid = document.querySelector(".grid-left")
+    const rightGrid = document.querySelector(".grid-right")
+    const ships = document.querySelectorAll(".ship")
+    const leftArray = []
+    const rightArray = []
+    const width = 10
+    let isHori = true
+    const rButton = document.getElementById("rotate")
+    const destroyer = document.querySelector(".destroyer-grid")
+    const cruiser = document.querySelector(".cruiser-grid")
+    const submarine = document.querySelector(".submarine-grid")
+    const battleship = document.querySelector(".battleship-grid")
+    const carrier = document.querySelector(".carrier-grid") //niet aircraft-carrier omdat - niet goed lijkt te gaan.
+
+    //create the sea, const eerst voor gemak,
+    //seagrid.dataset geeft id's aan de divs
+    //grid.appendChild maakt de grid
+    // .push om de array te vullen
+    // nodig voor bijde linker en rechter veld.
+    function createBoard(grid, array){
+      for(let i = 0; i < width*width; i++){
+        const seagrid = document.createElement("div")
+        seagrid.dataset.id = i
+        grid.appendChild(seagrid)
+        array.push(seagrid)
+      }
+    }
+
+    //schepen volgen nu de eerste[zijn voor verticaal] [de tweede voor horizontaal]
+    //de width is 10
+    const shipArray = [
+      { name: "destroyer", directions:[         [0,1],        [0,width] ]},
+      { name: "cruiser", directions:[           [0,1,2],      [0,width,width*2] ]},
+      { name: "submarine", directions:[         [0,1,2],      [0,width,width*2] ]},
+      { name: "battleship", directions:[        [0,1,2,3],    [0,width,width*2,width*3] ]},
+      { name: "carrier", directions:[           [0,1,2,3,4],  [0,width,width*2,width*3,width*4] ]},
+    ]
+
+    //random ships maken doen we hier met deze functie: hiermee kunnen we [verticaal of horizontaal kiezen]
+    function randomShips(ship){
+      //richting:
+      let horiOrVerti = Math.floor(Math.random()*ship.directions.length)
+      let orientation = ship.directions[horiOrVerti] //let direction hoort 1 of 0 te zijn
+
+      if (horiOrVerti === 0){
+        direction = 1
+      }  //horizontaal
+      if (horiOrVerti === 1){
+        direction = 10
+      }  //verticaal
+      //positie: (hiervoor is de array rightArray nodig die is van de computer)
+      //(hiermee halen we de mogelijkheid weg om in de muur te komen - (ship.direction[0]*direction)) moet getest worden werkt dit??
+      let randomPlace = Math.abs(Math.floor((Math.random()* rightArray.length) - (ship.directions[0].length * direction)))
+      //nu nog 2 problemen, aan de rand zitten van de map en als een square al in gebruik is.
+      //The some() method tests whether at least one element in the array passes the test implemented by the provided function.
+      //It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false.
+      //It doesn't modify the array. //taken is een tag die we gebruiken zodat een schip een plaats kan in nemen.
+
+      const occupied = orientation.some(index => rightArray[randomPlace + index].classList.contains("taken"))
+      const rightEdge = orientation.some(index => (randomPlace + index) % width === width - 1) //rechter kant returned een 9 omdat: 9 dan 19 dan 29 dus modulo 9
+      const leftEdge = orientation.some(index => (randomPlace + index) % width === 0) // met de zelfde logica retruned links: 0 dan 10 dan 20 dus modulo 0
+
+      if(!occupied && !rightEdge && !leftEdge){
+        orientation.forEach(function(index){ return rightArray[randomPlace + index].classList.add("taken", ship.name)})
+      }
+      else {
+        randomShips (ship)
+      }
+    }
+
+    //rotate functie maken om de schepen te kunnen draaien moet nog wat aan gewerkt worden.
+    function rotate(){
+      if (isHori) {
+        destroyer.classList.toggle("destroyer-grid-vertical")
+        cruiser.classList.toggle("cruiser-grid-vertical")
+        submarine.classList.toggle("submarine-grid-vertical")
+        battleship.classList.toggle("battleship-grid-vertical")
+        carrier.classList.toggle("carrier-grid-vertical") // naam is niet gelijk je hebt met .class list carrier anders altijd carrier-grid
+        isHori = false
+      } if(!isHori) {
+        destroyer.classList.toggle("destroyer-grid")
+        cruiser.classList.toggle("cruiser-grid")
+        submarine.classList.toggle("submarine-grid")
+        battleship.classList.toggle("battleship-grid")
+        carrier.classList.toggle("carrier-grid")
+        isHori = true
+      }
+    }
+
+    //verspelen op de grid:
+
+    ships.forEach(ship => ship.addEventListener('dragstart', dragStart))
+    leftArray.forEach(grid => grid.addEventListener('dragstart', dragStart))
+    leftArray.forEach(grid => grid.addEventListener('dragover', dragOver))
+    leftArray.forEach(grid => grid.addEventListener('dragenter', dragEnter))
+    leftArray.forEach(grid => grid.addEventListener('dragleave', dragLeave))
+    leftArray.forEach(grid => grid.addEventListener('dragdrop', dragDrop))
+    leftArray.forEach(grid => grid.addEventListener('dragend', dragEnd))
+
+    let selectedShip
+    ships.forEach(ship => ship.addEventListener('click', (e) => {
+      selectedShip = e.target.id
+    }))
+
+
+    function dragStart(e){
+      console.log(e.target)
+      console.log(this)
+    }
+
+    function dragOver(){
+
+    }
+
+    function dragEnter(){
+
+    }
+
+    function dragLeave(){
+
+    }
+
+    function dragDrop(){
+
+    }
+
+    function dragEnd(){
+
+    }
+
+    //uitvoeren:
+    createBoard(leftGrid, leftArray)
+    createBoard(rightGrid, rightArray)
+
+    randomShips(shipArray[0])
+    randomShips(shipArray[1])
+    randomShips(shipArray[2])
+    randomShips(shipArray[3])
+    randomShips(shipArray[4])
+
+    rButton.addEventListener('click', rotate)
+
+    </script>
+  </body>
+</html>
