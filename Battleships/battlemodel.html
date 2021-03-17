@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <script>
-const shipArray = [
+
+
+
+const lShipArray = [
   { name: "destroyer", positionx: 3, positiony: 3, direction: 1, damage: [true, false]}
   { name: "cruiser", positionx: 3, positiony: 4, direction: 1, damage: [true, false, false] }
   { name: "submarine", positionx: 3, positiony: 5, direction: 1, damage: [true, false, false] }
@@ -8,5 +11,32 @@ const shipArray = [
   { name: "carrier", positionx: 3, positiony: 7, direction: 1, damage: [true, false, false, false, false] }
 ]
 
-console.log(shipArray[0].name)
+const rShipArray = [
+  { name: "destroyer", positionx: 3, positiony: 3, direction: 1, damage: [true, false]}
+  { name: "cruiser", positionx: 3, positiony: 4, direction: 1, damage: [true, false, false] }
+  { name: "submarine", positionx: 3, positiony: 5, direction: 1, damage: [true, false, false] }
+  { name: "battleship", positionx: 3, positiony: 6, direction: 1, damage: [true, false, false, false] }
+  { name: "carrier", positionx: 3, positiony: 7, direction: 1, damage: [true, false, false, false, false] }
+]
+
+function makeInitialState(shipPositionsLeft, shipPositionsRight){
+  if( Math.round(Math.random()) === 1 )
+    let turn = "left"
+  else
+    let turn = "right"
+
+  let grid = []
+  for(x=0; x<10; x++){
+    grid[x] = []
+    for(y=0;y<10;y++){
+      grid[x][y] = "empty"
+    }
+  }
+
+  let game = {turn: turn, left: lShipArray, right: rShipArray, grid: grid}
+
+  return game
+}
+
+
 </script>

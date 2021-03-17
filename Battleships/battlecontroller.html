@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <script>
-function controller(shipArray, positionx, positiony){
+
+
+function shipShoot(shipArray, positionx, positiony){
 
   for(let i=0;  i < shipArray.length; i++){
     hit = shipCheck(shipArray[i], positionx, positiony)
@@ -12,17 +14,15 @@ function controller(shipArray, positionx, positiony){
 
   //Check if a ship "ship" was hit, if so return the segment that was hit
   function shipCheck(ship, positionx, positiony){
-    if (ship.direction % 2 == 0){
-      if(ship.positionx == positionx){
-        if(ship.direction == 0){
-          diff = positiony - ship.positiony
-        }
-        else{
-          diff = positiony + ship.positiony
-        }
-        if (diff >= 0 && diff < ship.damage.length){
-          return diff
-        }
+    if (ship.direction % 2 == 0 && ship.positionx == positionx){
+      if(ship.direction == 0){
+        diff = positiony - ship.positiony
+      }
+      else {
+        diff = positiony + ship.positiony
+      }
+      if (diff >= 0 && diff < ship.damage.length){
+        return diff
       }
     }
     else{
