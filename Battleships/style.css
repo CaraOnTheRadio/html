@@ -1,3 +1,45 @@
+html{
+  background-image: url("https://jooinn.com/images/ocean-background-4.jpg");
+  background-size: cover;
+}
+
+h3 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  color: white;
+  font-family: sans-serif;
+}
+
+button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: blue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+button:hover {background-color: lightblue}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .grids{
   display: flex;
 }
@@ -30,21 +72,21 @@
   width: 400px;
   height: 400px;
   margin: 5px;
-  background-color: darkblue;
-}
+  display: flex;
 
+}
 
 .destroyer-grid{
   width: 80px;
   height: 40px;
-  background-color: red;
+  background-color: green;
   margin: 5px;
   display: flex;
 }
 .destroyer-grid-vertical{
   width: 40px;
   height: 80px;
-  background-color: red;
+  background-color: green;
   margin: 5px;
   display: flex;
   flex-wrap: wrap;
@@ -121,7 +163,7 @@
 }
 
 .destroyer{
-  background-color: red;
+  background-color: green;
 }
 .cruiser{
   background-color: orange;
@@ -134,4 +176,17 @@
 }
 .carrier{
   background-color: black;
+}
+
+.destroyer-hidden{}
+.cruiser-hidden{}
+.submarine-hidden{}
+.battleship-hidden{}
+.carrier-hidden{}
+
+.boom{
+  background-color: red;
+}
+.miss{
+  background-color: grey;
 }

@@ -5,67 +5,53 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="grids">
-      <div class="grid grid-left"></div>
-      <div class="grid grid-right"></div>
+
+      <div class="grids">
+        <div class="grid grid-left"></div>
+        <div class="grid grid-right"></div>
+      </div>
+
+      <div class="background info">
+        <button id="start">Start Game</button>
+        <button id="rotate">Rotate</button>
+        <h3 id="turn"> Turn </h3>
+        <h3 id="info"></h3>
+      </div>
+
+    <div class="ships-dock">
+      <div class="ship destroyer-grid" draggable="true"><div id="destroyer-0"></div><div id="destroyer-1"></div></div>
+      <div class="ship cruiser-grid" draggable="true"><div id="cruiser-0"></div><div id="cruiser-1"></div><div id="cruiser-2"></div></div>
+      <div class="ship submarine-grid" draggable="true"><div id="submarine-0"></div><div id="submarine-1"></div><div id="submarine-2"></div></div>
+      <div class="ship battleship-grid" draggable="true"><div id="battleship-0"></div><div id="battleship-1"></div><div id="battleship-2"></div><div id="battleship-3"></div></div>
+      <div class="ship carrier-grid" draggable="true"><div id="carrier-0"></div><div id="carrier-1"></div><div id="carrier-2"></div><div id="carrier-3"></div><div id="carrier-4"></div></div>
     </div>
 
-    <div class="background info">
-      <button id="start">Start Game</button>
-      <button id="rotate">Rotate</button>
-      <h3 id="turn"> Turn </h3>
-      <h3 id="info"></h3>
-    </div>
-
-  <div class="ships-dock">
-
-    <div class="ship destroyer-grid" draggable="true">
-      <div id="destroyer-0"></div>
-      <div id="destroyer-1"></div>
-    </div>
-
-    <div class="ship cruiser-grid" draggable="true">
-      <div id="cruiser-0"></div>
-      <div id="cruiser-1"></div>
-      <div id="cruiser-2"></div>
-    </div>
-
-    <div class="ship submarine-grid" draggable="true">
-      <div id="submarine-0"></div>
-      <div id="submarine-1"></div>
-      <div id="submarine-2"></div>
-    </div>
-
-    <div class="ship battleship-grid" draggable="true">
-      <div id="battleship-0"></div>
-      <div id="battleship-1"></div>
-      <div id="battleship-2"></div>
-      <div id="battleship-3"></div>
-    </div>
-
-    <div class="ship carrier-grid" draggable="true">
-      <div id="carrier-0"></div>
-      <div id="carrier-1"></div>
-      <div id="carrier-2"></div>
-      <div id="carrier-3"></div>
-      <div id="carrier-4"></div>
-    </div>
-  </div>
-  </div>
-    <script>
+  <script>
+    //TODO: de computer is een idiot, je kan beginnen terwijl je geen schepen hebt verplaatst, schip placement is niet af. Schepen hebben geen css
     const leftGrid = document.querySelector(".grid-left")
     const rightGrid = document.querySelector(".grid-right")
+    const displayGrid = document.querySelector('.ships-dock')
     const ships = document.querySelectorAll(".ship")
     const leftArray = []
     const rightArray = []
     const width = 10
-    let isHori = true
+
     const rButton = document.getElementById("rotate")
     const destroyer = document.querySelector(".destroyer-grid")
     const cruiser = document.querySelector(".cruiser-grid")
     const submarine = document.querySelector(".submarine-grid")
     const battleship = document.querySelector(".battleship-grid")
     const carrier = document.querySelector(".carrier-grid") //niet aircraft-carrier omdat - niet goed lijkt te gaan.
+    const turnDisplay = document.querySelector("#turn")
+    const infoDisplay = document.querySelector("#info")
+    const startButton = document.querySelector('#start')
+    //const Buttons = document.getElementById() //niet meer nodig
+
+    let isHori = true
+    let isGameOver = false
+    let currentPlayer = "user"
+
+    turnDisplay.innerHTML = "Drag and drop the ships then press start"
 
     //create the sea, const eerst voor gemak,
     //seagrid.dataset geeft id's aan de divs
@@ -81,15 +67,26 @@
       }
     }
 
+    //uitvoeren:
+    createBoard(leftGrid, leftArray)
+    createBoard(rightGrid, rightArray)
+
     //schepen volgen nu de eerste[zijn voor verticaal] [de tweede voor horizontaal]
     //de width is 10
     const shipArray = [
-      { name: "destroyer", directions:[         [0,1],        [0,width] ]},
-      { name: "cruiser", directions:[           [0,1,2],      [0,width,width*2] ]},
-      { name: "submarine", directions:[         [0,1,2],      [0,width,width*2] ]},
-      { name: "battleship", directions:[        [0,1,2,3],    [0,width,width*2,width*3] ]},
-      { name: "carrier", directions:[           [0,1,2,3,4],  [0,width,width*2,width*3,width*4] ]},
+      { name: "destroyer-hidden", directions:[         [0,1],        [0,width] ]},
+      { name: "cruiser-hidden", directions:[           [0,1,2],      [0,width,width*2] ]},
+      { name: "submarine-hidden", directions:[         [0,1,2],      [0,width,width*2] ]},
+      { name: "battleship-hidden", directions:[        [0,1,2,3],    [0,width,width*2,width*3] ]},
+      { name: "carrier-hidden", directions:[           [0,1,2,3,4],  [0,width,width*2,width*3,width*4] ]},
     ]
+
+    //uitvoeren:
+    randomShips(shipArray[0])
+    randomShips(shipArray[1])
+    randomShips(shipArray[2])
+    randomShips(shipArray[3])
+    randomShips(shipArray[4])
 
     //random ships maken doen we hier met deze functie: hiermee kunnen we [verticaal of horizontaal kiezen]
     function randomShips(ship){
@@ -132,69 +129,273 @@
         battleship.classList.toggle("battleship-grid-vertical")
         carrier.classList.toggle("carrier-grid-vertical") // naam is niet gelijk je hebt met .class list carrier anders altijd carrier-grid
         isHori = false
+        return
+
       } if(!isHori) {
-        destroyer.classList.toggle("destroyer-grid")
-        cruiser.classList.toggle("cruiser-grid")
-        submarine.classList.toggle("submarine-grid")
-        battleship.classList.toggle("battleship-grid")
-        carrier.classList.toggle("carrier-grid")
+        destroyer.classList.toggle("destroyer-grid-vertical")
+        cruiser.classList.toggle("cruiser-grid-vertical")
+        submarine.classList.toggle("submarine-grid-vertical")
+        battleship.classList.toggle("battleship-grid-vertical")
+        carrier.classList.toggle("carrier-grid-vertical")
         isHori = true
+        return
+      }
+    }
+    rButton.addEventListener('click', rotate)
+
+    //hiermee kan ik het schip er in verplaatsen
+    ships.forEach(ship => ship.addEventListener("dragstart", dragStart))
+    leftArray.forEach(grid => grid.addEventListener("dragstart", dragStart))
+    leftArray.forEach(grid => grid.addEventListener("dragover", dragOver))
+    leftArray.forEach(grid => grid.addEventListener("dragenter", dragEnter))
+    leftArray.forEach(grid => grid.addEventListener("dragleave", dragLeave))
+    leftArray.forEach(grid => grid.addEventListener("drop", dragDrop))
+    leftArray.forEach(grid => grid.addEventListener("dragend", dragEnd))
+
+    let selectedShipNameWithIndex
+    let draggedShip
+    let draggedShipLength
+
+
+    ships.forEach(ship => ship.addEventListener("mousedown", (e) => {
+      selectedShipNameWithIndex = e.target.id
+      console.log(selectedShipNameWithIndex)
+    }))
+
+    function dragStart() {
+      draggedShip = this
+      draggedShipLength = this.childNodes.length
+      //console.log(draggedShip)
+      //console.log(draggedShipLength)
+    }
+
+    function dragOver(e) {
+      e.preventDefault()
+    }
+
+    function dragEnter(e) {
+      e.preventDefault()
+    }
+
+    function dragLeave() {
+      //console.log("Dont leave me!") // alles ging mis omdat ik een lege array had. Ik maakte de array onder deze functie aan!
+    }
+
+    function dragEnd() {
+      //console.log('End')
+    }
+
+    function dragDrop() { //TODO deze hele functie is niet mooi
+      let shipNameWithLastId = draggedShip.lastChild.id
+      let shipClass = shipNameWithLastId.slice(0, -2)
+      console.log(shipClass)
+      let lastShipIndex = parseInt(shipNameWithLastId.substr(-1))
+      let shipLastId = lastShipIndex + parseInt(this.dataset.id)
+      console.log(shipLastId)
+
+      const notAllowedHorizontal = [9,19,29,39,49,59,69,79,89,99] //TODO:verbeter dit.
+      const notAllowedVertical = [99,98,97,96,95,94,93,92,91,90] //anders kan je het in de muur zetten.
+
+      let newNotAllowedHorizontal = notAllowedHorizontal.splice(0, 10 * lastShipIndex)
+      let newNotAllowedVertical = notAllowedVertical.splice(0, 10 * lastShipIndex)
+
+      selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1))
+
+      shipLastId = shipLastId - selectedShipIndex
+      console.log(shipLastId)
+
+      if (isHori && !newNotAllowedHorizontal.includes(shipLastId)) { //TODO werkt alleen als je horizontaal schepen plaatst?
+        for (let i=0; i < draggedShipLength; i++) {
+          if(leftArray[parseInt(this.dataset.id) - selectedShipIndex + i].classList.contains("taken")) {
+            dragEnd()
+            return alert("spot is taken")
+          }
+
+          // if(leftArray[parseInt(this.dataset.id) - selectedShipIndex + width*i].classList.contains("taken")) {
+          //   dragEnd()
+          //   return alert("spot is taken") //TODO wat is er mis hier mee? P
+          // }
+        }
+
+        //schip plaatsen
+        for (let i=0; i < draggedShipLength; i++) {
+          leftArray[parseInt(this.dataset.id) - selectedShipIndex + i].classList.add("taken", shipClass)
+        }
+          displayGrid.removeChild(draggedShip)
+
+       } else if (!isHori && !newNotAllowedVertical.includes(shipLastId)) {
+            for (let i=0; i < draggedShipLength; i++) {
+              leftArray[parseInt(this.dataset.id) - selectedShipIndex + width*i].classList.add("taken", shipClass)
+            }
+          displayGrid.removeChild(draggedShip)
+        }
+    }
+
+    function playGame(){
+      if (isGameOver) {
+        return
+      }
+
+      if (currentPlayer === "user"){
+        turnDisplay.innerHTML = "Fire a shell, red means hit, grey means miss"
+        rightArray.forEach(grid => grid.addEventListener("click", function(c) {
+          reveal(grid)
+        }))
+      }
+
+      if (currentPlayer === "computer"){
+        turnDisplay.innerHTML = "computers turn"
+        computerTurn() //zodat de computer een turn neemt en niet meteen doorgeeft..
       }
     }
 
-    //verspelen op de grid:
+    startButton.addEventListener("click", playGame)
 
-    ships.forEach(ship => ship.addEventListener('dragstart', dragStart))
-    leftArray.forEach(grid => grid.addEventListener('dragstart', dragStart))
-    leftArray.forEach(grid => grid.addEventListener('dragover', dragOver))
-    leftArray.forEach(grid => grid.addEventListener('dragenter', dragEnter))
-    leftArray.forEach(grid => grid.addEventListener('dragleave', dragLeave))
-    leftArray.forEach(grid => grid.addEventListener('dragdrop', dragDrop))
-    leftArray.forEach(grid => grid.addEventListener('dragend', dragEnd))
+    let destroyerCount = 0
+    let submarineCount = 0
+    let cruiserCount = 0
+    let battleShipCount = 0
+    let carrierCount = 0
 
-    let selectedShip
-    ships.forEach(ship => ship.addEventListener('click', (e) => {
-      selectedShip = e.target.id
-    }))
+    function reveal(grid){ //eigenlijk player turn zou je dit kunnen neomen.
+      if(!grid.classList.contains("boom") && !grid.classList.contains("miss")){ //schip geraakt
+        //welk schip is geraakt
+        if(grid.classList.contains("destroyer-hidden")){
+          destroyerCount++
+        }
+        if(grid.classList.contains("submarine-hidden")){
+          submarineCount++
+        }
+        if(grid.classList.contains("cruiser-hidden")){
+          cruiserCount++
+        }
+        if(grid.classList.contains("battleship-hidden")){
+          battleShipCount++
+        }
+        if(grid.classList.contains("carrier-hidden")){
+          carrierCount++
+        }
+        win()
+      } else {
+        reveal(grid) //zodat men niet hetzelfde kan klikken
+      }
 
+      if(grid.classList.contains("taken")){
+        grid.classList.add("boom")
+      } else {
+        grid.classList.add("miss")
+      }
+      currentPlayer = "computer"
 
-    function dragStart(e){
-      console.log(e.target)
-      console.log(this)
+      playGame()
     }
 
-    function dragOver(){
+    let cpuDestroyerCount = 0
+    let cpuSubmarineCount = 0
+    let cpuCruiserCount = 0
+    let cpuBattleShipCount = 0
+    let cpuCarrierCount = 0
 
+    function computerTurn(){
+      let random = Math.floor(Math.random() * leftArray.length) //TODO: slimmer computer maken.
+      console.log(random)
+      console.log(leftArray[random].classList)
+
+      if(!leftArray[random].classList.contains("boom")){
+        if(leftArray[random].classList.contains("destroyer")){
+          cpuDestroyerCount++
+        }
+        if(leftArray[random].classList.contains("submarine")){
+          cpuSubmarineCount++
+        }
+        if(leftArray[random].classList.contains("cruiser")){
+          cpuCruiserCount++
+        }
+        if(leftArray[random].classList.contains("battleship")){
+          cpuBattleShipCount++
+        }
+        if(leftArray[random].classList.contains("carrier")){
+          cpuCarrierCount++
+        }
+        win()
+      } else computerTurn() //voor als ie twee keer op het zelfde zou vuren of op een square die niet mag
+
+      if(leftArray[random].classList.contains("taken")){
+        leftArray[random].classList.add("boom")
+      } else {
+        leftArray[random].classList.add("miss")
+      }
+      currentPlayer = "user"
+      turnDisplay.innerHTML = "Keep firing"
     }
 
-    function dragEnter(){
+    function win(){
+      if (destroyerCount === 2){
+        infoDisplay.innerHTML = "The enemy destroyer has been destroyed!"
+        destroyerCount = 10
+      }
 
+      if (battleShipCount === 4){
+        infoDisplay.innerHTML = "That battleship is gone!"
+        battleShipCount = 10
+      }
+
+      if (cruiserCount === 3){
+        infoDisplay.innerHTML = "You got the cruiser, well done"
+        cruiserCount = 10
+      }
+
+      if (submarineCount === 3){
+        infoDisplay.innerHTML = "Submarine send to the bottom"
+        submarineCount = 10
+      }
+
+      if (carrierCount === 5){
+        infoDisplay.innerHTML = "Their carrier is no more"
+        carrierCount = 10
+      }
+
+      if (cpuDestroyerCount === 2){
+        infoDisplay.innerHTML = "Destroyer lost"
+        cpuDestroyerCount = 10
+      }
+
+      if (cpuBattleShipCount === 4){
+        infoDisplay.innerHTML = "Battleship lost"
+        cpuBattleShipCount = 10
+      }
+
+      if (cpuCruiserCount === 3){
+        infoDisplay.innerHTML = "Cruiser lost"
+        cpuCruiserCount = 10
+      }
+
+      if (cpuSubmarineCount === 3){
+        infoDisplay.innerHTML = "Submarine lost"
+        cpuSubmarineCount = 10
+      }
+
+      if (cpuCarrierCount === 5){
+        infoDisplay.innerHTML = "Carrier lost"
+        cpuCarrierCount = 10
+      }
+
+      console.log((cpuDestroyerCount + cpuSubmarineCount + cpuCruiserCount + cpuBattleShipCount + cpuCarrierCount));
+
+      if ((destroyerCount + submarineCount + cruiserCount + battleShipCount + carrierCount) === 50) {
+        infoDisplay.innerHTML = "YOU WIN"
+        gameOver()
+      }
+      if ((cpuDestroyerCount + cpuSubmarineCount + cpuCruiserCount + cpuBattleShipCount + cpuCarrierCount) === 50) {
+        infoDisplay.innerHTML = "YOU LOSE"
+        gameOver()
+      }
+    } //heel lelijk maar het werkt
+    function gameOver(){
+      isGameOver = true
+      startButton.removeEventListener("click", playGame)
+      //alert("YOU WIN! Excellent job") //zorgt voor problemen
     }
-
-    function dragLeave(){
-
-    }
-
-    function dragDrop(){
-
-    }
-
-    function dragEnd(){
-
-    }
-
-    //uitvoeren:
-    createBoard(leftGrid, leftArray)
-    createBoard(rightGrid, rightArray)
-
-    randomShips(shipArray[0])
-    randomShips(shipArray[1])
-    randomShips(shipArray[2])
-    randomShips(shipArray[3])
-    randomShips(shipArray[4])
-
-    rButton.addEventListener('click', rotate)
-
     </script>
   </body>
 </html>
