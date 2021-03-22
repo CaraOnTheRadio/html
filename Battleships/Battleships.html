@@ -238,7 +238,7 @@
 
       if (currentPlayer === "user"){
         turnDisplay.innerHTML = "Fire a shell, red means hit, grey means miss"
-        rightArray.forEach(grid => grid.addEventListener("click", function(c) {
+        rightArray.forEach(grid => grid.addEventListener("click", c => { //function(c) naar c =>
           reveal(grid)
         }))
       }
