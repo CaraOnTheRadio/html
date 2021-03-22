@@ -298,8 +298,6 @@
 
     function computerTurn(){
       let random = Math.floor(Math.random() * leftArray.length) //TODO: slimmer computer maken.
-      console.log(random)
-      console.log(leftArray[random].classList)
 
       if(!leftArray[random].classList.contains("boom")){
         if(leftArray[random].classList.contains("destroyer")){
